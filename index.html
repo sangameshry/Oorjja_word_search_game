@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Scramble Game</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #87CEEB;
+            overflow: hidden;
+        }
+        .main-container {
+            display: flex;
+            max-width: 1200px;
+            width: 95%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .play-container, .instructions-container {
+            padding: 2rem;
+            width: 50%;
+        }
+        .play-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #FFF8DC;
+        }
+        h1 {
+            color: #FF6347;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .play-button {
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 50px;
+            background-color: #32CD32;
+            color: white;
+            transition: all 0.3s;
+            margin: 1rem 0;
+        }
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        .instructions-container {
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+        .instructions h2 {
+            color: #4682B4;
+        }
+        .instructions ol {
+            padding-left: 1.5rem;
+            margin-bottom: 0;
+        }
+        .instructions li {
+            margin-bottom: 0.5rem;
+        }
+        .floating-letters {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.5;
+            animation: float 5s infinite ease-in-out;
+            z-index: -1;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="play-container">
+            <h1>Word Scramble Game</h1>
+            <button class="play-button" onclick="window.location.href='easy.html'">Play</button>
+        </div>
+        <div class="instructions-container">
+            <div class="instructions">
+                <h2>How to Play:</h2>
+                <ol>
+                    <li>A scrambled word will appear on the screen.</li>
+<li>You have 30 seconds to unscramble and guess the correct word.</li>
+<li>Type your answer in the input field provided.</li>
+<li>Click the "Check Word" button or press Enter to submit your guess.</li>
+<li>Points are awarded based on how quickly you answer:
+    <ul>
+        <li>10 points for answers within the first 10 seconds</li>
+        <li>8 points for answers between 10-15 seconds</li>
+        <li>6 points for answers between 15-25 seconds</li>
+        <li>4 points for answers in the last 5 seconds</li>
+    </ul>
+</li>
+<li>If your guess is incorrect, you'll be notified and can try again within the time limit.</li>
+<li>A hint will appear after 10 seconds if you're struggling with the word.</li>
+<li>If time runs out, the correct word will be revealed, and you'll move to the next word.</li>
+<li>There are 10 words to unscramble in each level (easy, medium, hard).</li>
+<li>After completing a level, you'll automatically move to the next difficulty level.</li>
+<li>Your score accumulates across all levels. The game ends after completing all three difficulty levels.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div id="floatingLetters"></div>
+
+    <script>
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const container = document.getElementById('floatingLetters');
+
+        for (let i = 0; i < 20; i++) {
+            const span = document.createElement('span');
+            span.className = 'floating-letters';
+            span.style.left = `${Math.random() * 100}vw`;
+            span.style.top = `${Math.random() * 100}vh`;
+            span.style.animationDelay = `${Math.random() * 5}s`;
+            span.textContent = letters[Math.floor(Math.random() * letters.length)];
+            container.appendChild(span);
+        }
+    </script>
+</body>
+</html>
